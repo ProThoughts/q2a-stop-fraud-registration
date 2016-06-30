@@ -20,5 +20,5 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 
 // language file
 qa_register_plugin_phrases('qa-stop-fraud-registration-lang-*.php', 'qa_stop_fraud_registration');
-// admin
-qa_register_plugin_module('module', 'qa-stop-fraud-registration-admin.php', 'qa_stop_fraud_registration_admin', 'Stop Fraud Registration');
+// event
+qa_register_plugin_module('event', 'qa-stop-fraud-registration.php', 'qa_stop_fraud_registration', 'Stop Fraud Registration');

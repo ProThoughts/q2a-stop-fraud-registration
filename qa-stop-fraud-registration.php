@@ -1,6 +1,6 @@
 <?php
 
-class qa_stop_fraud_registration_admin {
+class qa_stop_fraud_registration {
 
 	function option_default($option) {
 		switch($option) {
@@ -53,5 +53,27 @@ class qa_stop_fraud_registration_admin {
 				),
 			),
 		);
+	}
+
+	function process_event($event, $userid, $handle, $cookieid, $params)
+	{
+		if ($event === 'u_register' || $event === 'u_login') {
+			error_log('event:' . $event);
+			error_log('userid:' . $userid);
+			error_log('handle:' . $handle);
+			error_log('ipaddress:' . qa_remote_ip_address());
+		}
+	}
+
+	function count_regist_number($ipaddress, $hour)
+	{
+		$sql = "
+SELECT count(*)
+ FROM ^eventlog
+ WHERE event = 'u_login'
+ AND ipaddress =  $
+ AND DATETIME > ( NOW( ) - INTERVAL # HOUR ) 
+";
+		return 0;
 	}
 }
