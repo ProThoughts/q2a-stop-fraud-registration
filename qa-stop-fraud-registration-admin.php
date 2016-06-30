@@ -4,8 +4,10 @@ class qa_stop_fraud_registration_admin {
 
 	function option_default($option) {
 		switch($option) {
-			case 'qa_stop_fraud_registration_':
-				return 0;
+			case 'qa_stop_fraud_registration_hours':
+				return 1;
+			case 'qa_stop_fraud_registration_max_registers':
+				return 5;
 			default:
 				return null;
 		}
@@ -19,7 +21,8 @@ class qa_stop_fraud_registration_admin {
 		// process the admin form if admin hit Save-Changes-button
 		$ok = null;
 		if (qa_clicked('qa_stop_fraud_registration_save')) {
-			qa_opt('qa_stop_fraud_registration_', (int)qa_post_text('qa_stop_fraud_registration_'));
+			qa_opt('qa_stop_fraud_registration_hours', (int)qa_post_text('qa_stop_fraud_registration_hours'));
+			qa_opt('qa_stop_fraud_registration_max_registers', (int)qa_post_text('qa_stop_fraud_registration_max_registers'));
 			$ok = qa_lang('admin/options_saved');
 		}
 
@@ -27,10 +30,17 @@ class qa_stop_fraud_registration_admin {
 		$fields = array();
 
 		$fields[] = array(
-			'type' => 'checkbox',
-			'label' => qa_lang('qa_stop_fraud_registration/'),
-			'tags' => 'NAME="qa_stop_fraud_registration_"',
-			'value' => qa_opt('qa_stop_fraud_registration_'),
+			'type' => 'number',
+			'label' => qa_lang('qa_stop_fraud_registration/within_hours'),
+			'tags' => 'NAME="qa_stop_fraud_registration_hours"',
+			'value' => qa_opt('qa_stop_fraud_registration_hours'),
+		);
+
+		$fields[] = array(
+			'type' => 'number',
+			'label' => qa_lang('qa_stop_fraud_registration/max_registers'),
+			'tags' => 'NAME="qa_stop_fraud_registration_max_registers"',
+			'value' => qa_opt('qa_stop_fraud_registration_max_registers'),
 		);
 
 		return array(
