@@ -1,5 +1,7 @@
 <?php
 
+require_once QA_PLUGIN_DIR.'q2a-stop-fraud-registration/sfr-send-mail.php';
+
 class qa_stop_fraud_registration {
 
 	function option_default($option) {
@@ -66,7 +68,9 @@ class qa_stop_fraud_registration {
 
 			if ($count > $max_count) {
 				qa_opt('suspend_register_users', 1);
-				error_log('send mail');
+				sfr_send_mail::setup();
+				sfr_send_mail::body_create($ipaddress);
+				sfr_send_mail::send();
 			}
 		}
 	}

@@ -16,7 +16,9 @@
 	return array(
 		// japanese
 		'within_hours' => '何時間以内に:',
-		'max_registers' => '上記時間内にこの人数を超えた場合新規登録を停止する<br>人数:'
+		'max_registers' => '上記時間内にこの人数を超えた場合新規登録を停止する<br>人数:',
+		'mail_subject' => qa_opt('site_title') . ' 新規ユーザー登録を停止しました',
+		'mail_body' => "下記IPアドレスからの登録が規定回数を超えましたので\n新規ユーザー登録を停止いたしました。",
 	);
 
 

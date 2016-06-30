@@ -18,7 +18,7 @@ class sfr_send_mail
 		self::$params['fromemail'] = qa_opt('from_email');
 		self::$params['fromname'] = qa_opt('site_title');
 		self::$params['toemail'] = qa_opt('feedback_email');
-		self::$params['subject'] = 'メールの件名';
+		self::$params['subject'] = qa_lang('qa_stop_fraud_registration/mail_subject');
 		self::$params['toname'] = '管理人';
 		self::$params['html'] = false;
 	}
@@ -31,7 +31,7 @@ class sfr_send_mail
 	public static function body_create($ipaddress)
 	{
 		self::$body = '';
-		self::$body .= "メール本文\n\n";
+		self::$body .= qa_lang('qa_stop_fraud_registration/mail_body') . "\n\n";
 		self::$body .= "IP ADDRESS: " . $ipaddress . "\n";
 	}
 }
