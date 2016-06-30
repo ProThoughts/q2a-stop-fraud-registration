@@ -10,7 +10,6 @@ require_once QA_INCLUDE_DIR.'qa-app-emails.php';
 class sfr_send_mail
 {
 	public static $params;
-	public static $body;
 
 	public static function setup()
 	{
@@ -30,8 +29,8 @@ class sfr_send_mail
 
 	public static function body_create($ipaddress)
 	{
-		self::$body = '';
-		self::$body .= qa_lang('qa_stop_fraud_registration/mail_body') . "\n\n";
-		self::$body .= "IP ADDRESS: " . $ipaddress . "\n";
+		self::$params['body'] = '';
+		self::$params['body'] .= qa_lang('qa_stop_fraud_registration/mail_body') . "\n\n";
+		self::$params['body'] .= "IP ADDRESS: " . $ipaddress . "\n";
 	}
 }
