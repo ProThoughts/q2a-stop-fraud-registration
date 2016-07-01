@@ -19,6 +19,7 @@ class sfr_send_mail
 		self::$params['toemail'] = qa_opt('feedback_email');
 		self::$params['subject'] = qa_lang('qa_stop_fraud_registration/mail_subject');
 		self::$params['toname'] = '管理人';
+		self::$params['body'] = qa_lang('qa_stop_fraud_registration/mail_body') . "\n\n";
 		self::$params['html'] = false;
 	}
 
@@ -27,10 +28,4 @@ class sfr_send_mail
 		qa_send_email(self::$params);
 	}
 
-	public static function body_create($ipaddress)
-	{
-		self::$params['body'] = '';
-		self::$params['body'] .= qa_lang('qa_stop_fraud_registration/mail_body') . "\n\n";
-		self::$params['body'] .= "IP ADDRESS: " . $ipaddress . "\n";
-	}
 }

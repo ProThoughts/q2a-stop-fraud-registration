@@ -18,7 +18,7 @@
 		'within_hours' => 'Within hours:',
 		'max_registers' => 'Max Registars:',
 		'mail_subject' => qa_opt('site_title') . ' Stopped New Registration',
-		'mail_body' => 'This IP address has exceeded the registration, it has stopped the user new registration.',
+		'mail_body' => 'Exceeded the registration, it has stopped the user new registration.',
 	);
 
 

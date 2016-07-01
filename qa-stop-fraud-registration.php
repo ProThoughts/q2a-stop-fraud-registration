@@ -62,34 +62,31 @@ class qa_stop_fraud_registration {
 		if ($event === 'u_register') {
 			$max_count = qa_opt('qa_stop_fraud_registration_max_registers');
 			$hour = qa_opt('qa_stop_fraud_registration_hours');
-			$ipaddress = qa_remote_ip_address();
+			// $ipaddress = qa_remote_ip_address();
 
-			$count = $this->count_regist_number($ipaddress, $hour);
-
+			$count = $this->count_regist_number($hour);
+			
 			if ($count > $max_count) {
 				qa_opt('suspend_register_users', 1);
 				sfr_send_mail::setup();
-				sfr_send_mail::body_create($ipaddress);
 				sfr_send_mail::send();
 			}
 		}
 	}
 
-	function count_regist_number($ipaddress = null, $hour = null)
+	function count_regist_number($hour = null)
 	{
-		if (!isset($ipaddress) || $hour < 0) {
+		if ($hour < 0) {
 			return 0;
 		}
-		$params = array($ipaddress, $hour);
 
 		$sql = "
 SELECT count(*) as regist_count
  FROM ^eventlog
  WHERE event = 'u_register'
- AND ipaddress =  $
  AND DATETIME > ( NOW() - INTERVAL # HOUR )
 ";
-		$query = qa_db_query_sub(qa_db_apply_sub($sql, $params));
+		$query = qa_db_query_sub($sql, $hour);
 		$result = qa_db_read_one_assoc($query);
 		return $result['regist_count'];
 	}
