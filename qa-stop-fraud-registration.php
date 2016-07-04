@@ -63,9 +63,9 @@ class qa_stop_fraud_registration {
 			$max_count = qa_opt('qa_stop_fraud_registration_max_registers');
 			$hour = qa_opt('qa_stop_fraud_registration_hours');
 			// $ipaddress = qa_remote_ip_address();
-
+			qa_db_user_login_sync(false);
 			$count = $this->count_regist_number($hour);
-			
+			qa_db_user_login_sync(true);
 			if ($count > $max_count) {
 				qa_opt('suspend_register_users', 1);
 				sfr_send_mail::setup();
