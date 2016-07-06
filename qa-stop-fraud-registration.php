@@ -82,9 +82,8 @@ class qa_stop_fraud_registration {
 
 		$sql = "
 SELECT count(*) as regist_count
- FROM ^eventlog
- WHERE event = 'u_register'
- AND DATETIME > ( NOW() - INTERVAL # HOUR )
+ FROM ^users
+ WHERE created > ( NOW() - INTERVAL # HOUR )
 ";
 		$query = qa_db_query_sub($sql, $hour);
 		$result = qa_db_read_one_assoc($query);
